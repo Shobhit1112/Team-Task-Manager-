@@ -1,7 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  preview: {
+    allowedHosts: ['hopeful-unity-production-8b94.up.railway.app'],
+    host: '0.0.0.0',
+    port: 4173
+  }
 })
