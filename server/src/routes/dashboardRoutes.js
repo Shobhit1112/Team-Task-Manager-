@@ -5,7 +5,8 @@ const Task = require("../models/Task");
 const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
-  const tasks = await Task.find({ assignedTo: req.user._id });
+  const query = req.user.role === "Admin" ? {} : { assignedTo: req.user._id };
+  const tasks = await Task.find(query);
   const now = new Date();
 
   const stats = {
