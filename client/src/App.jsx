@@ -52,9 +52,8 @@ function App() {
       setTasks(taskRes.data);
 
       if (user?.role === "Admin") {
-        const teamUsers = projectRes.data.flatMap((project) => project.team || []);
-        const uniqueUsers = [...new Map(teamUsers.map((member) => [member._id, member])).values()];
-        setAllUsers(uniqueUsers);
+        const usersRes = await api.get("/auth/users", authHeaders);
+        setAllUsers(usersRes.data);
       }
     } catch (err) {
       setError(err.response?.data?.message || "Failed to load data");
